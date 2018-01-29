@@ -1,23 +1,72 @@
 ﻿// Created by Maxim Sarandev
 // Jan 2018
-// Custom Software for BEED Gaming. All rights reserved
+// Custom Software for BEDE Gaming. All rights reserved
 
 using System;
+using System.Runtime.Remoting.Metadata.W3cXsd2001;
 
 namespace SarandevBattleships
 {
     public class Ship
     {
+        // Defines the battleship class, with all necesary properties and methods
+        
+        
         // Variables Declaration
-        public string id; // unique ship id
-        public string type; // defines the type of ship
-        public int size; // ship size
-        public int rotation; // ship rotation
-        public int pos_x; // position on grid (X coordinate)
-        public int pos_y; // position on grid (Y coordinate)
+        private string id; // unique ship id
+        private string type; // defines the type of ship
+        private int size; // ship size
+        private int rotation; // ship rotation (0 - upright, 1 - horizontal)
+        private int pos_x; // position on grid (X coordinate)
+        private int pos_y; // position on grid (Y coordinate)
+        
+        // Properties definition (some are omitted as they're obsolete
+        public void SetPosX (int inp)
+        {
+            this.pos_x = inp;
+        }
+        
+        public int GetPosX()
+        {
+            return this.pos_x;
+        }
+        
+        public void SetPosY (int inp)
+        {
+            this.pos_y = inp;
+        }
+        
+        public int GetPosY()
+        {
+            return this.pos_y;
+        }
+
+        public void SetRotation(int inp)
+        {
+            this.rotation = inp;
+        }
+
+        public int GetRotation()
+        {
+            return this.rotation;
+        }
+
+        public void SetSize(int inp)
+        {
+            if (inp <= 5 & inp >= 4) // error control
+            { 
+                this.size = inp;   
+                this.ChangeShipType(); // update the ship type
+            }
+        }
+
+        public int GetSize()
+        {
+            return this.size;
+        }
         
         // Constructor definition
-        public Ship(string id, int size, int rotation, int posX, int posY)
+        public Ship(string id, int size)
         {
             this.id = id;
             this.size = size;
@@ -34,29 +83,44 @@ namespace SarandevBattleships
                     break;
             }
 
-            this.rotation = rotation;
-            pos_x = posX;
-            pos_y = posY;
+            // The properties are defaulted to no rotation, x=0, y=0
+            this.rotation = 90;
+            pos_x = 0;
+            pos_y = 0;
         }
-        
-        
-        // De-constructor definition
-        public void Deconstruct(Ship shp1)
+
+        // Empty constructor
+        public Ship()
         {
-            // Deconstruct the object based on the ship parsed
-            id = shp1.id;
-            type = shp1.type;
-            size = shp1.size;
-            rotation = shp1.rotation;
-            pos_x = shp1.pos_x;
-            pos_y = shp1.pos_y;
+            
         }
         
         // Custom methods
+
+        public void ChangeShipType()
+        {
+            switch (size)
+            {
+                case 4:
+                    this.type = "Destroyer";
+                    break;
+                case 5:
+                    this.type = "Battleship";
+                    break;
+                default: this.type = "Undefined";
+                    break;
+            }
+        }
+        
+        // Prints the object properties (Debug)
         public void print_me()
         {
-            Console.WriteLine(id);
-            Console.WriteLine(type);
+            Console.WriteLine(id.ToString() + ", " +
+                              size.ToString() + ", " +
+                              type + ", " +
+                              rotation.ToString() + ", " +
+                              pos_x.ToString() + ", " +
+                              pos_y.ToString());
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿// Created by Maxim Sarandev
 // Jan 2018
-// Custom Software for BEED Gaming. All rights reserved
+// Custom Software for BEDE Gaming. All rights reserved
 
 using System;
 
@@ -12,11 +12,14 @@ namespace SarandevBattleships
         {
             // Main application method
             
-            var ship1 = new Ship("alpha",4,90,0,0);
+            GameBoard gb1 = new GameBoard();
+
+            bool control = gb1.GenerateBoard();
+            Console.WriteLine(control);
             
-            ship1.print_me();
+            gb1.PopulateBoard();
             
-            ship1.Deconstruct(ship1);
+            gb1.PrintWholeBoard();
         }
     }
 }
