@@ -19,7 +19,6 @@ namespace SarandevBattleships
         private int shots_taken;
         private List<int> shots_successful = new List<int>(); // stores id's of squares
         private int shots_unsuccessful = 0; // default to 0
-        private int ships_count = 0; // default to 0
         private List<GameSquare> full_board = new List<GameSquare>();
         
         
@@ -330,6 +329,40 @@ namespace SarandevBattleships
                 // passive error handling
                 return "No shots taken";
             }
+        }
+        
+        // -------------------
+        // Graphical methods below
+        public void MenuGraphic()
+        {
+            Console.WriteLine("    ____                                                        " + "\n" +
+                              "    /   )                    /              /     ,             " + "\n" +
+                              "---/__ /-----__--_/_--_/_---/----__---__---/__----------__---__-" + "\n" +
+                              "  /    )   /   ) /    /    /   /___) (_ ` /   ) /     /   ) (_ `" + "\n" +
+                              "_/____/___(___(_(_ __(_ __/___(___ _(__)_/___/_/_____/___/_(__)_" + "\n" +
+                              "                                                    /           " + "\n" +
+                              "                                                   /            ");
+            Console.WriteLine("Custom Software by M. Sarandev | Made for Bede gaming |  2018  |");
+            Console.WriteLine("\n \n");
+        }
+
+        public void ScoreGraphic()
+        {
+            Console.WriteLine("                                             " + "\n" +
+                              "      _/_/_/  _/        _/                   " + "\n" +
+                              "   _/        _/_/_/        _/_/_/      _/_/_/" + "\n" +
+                              "    _/_/    _/    _/  _/  _/    _/  _/_/     " + "\n" +
+                              "       _/  _/    _/  _/  _/    _/      _/_/  " + "\n" +
+                              "_/_/_/    _/    _/  _/  _/_/_/    _/_/_/     " + "\n" +
+                              "                       _/                    " + "\n" +
+                              "                      _/                     " + "\n" +
+                              "                                   _/      " + "\n" +
+                              "      _/_/_/  _/    _/  _/_/_/    _/  _/   " + "\n" +
+                              "   _/_/      _/    _/  _/    _/  _/_/      " + "\n" +
+                              "      _/_/  _/    _/  _/    _/  _/  _/     " + "\n" +
+                              " _/_/_/      _/_/_/  _/    _/  _/    _/    " + "\n");
+            Console.WriteLine(" ------------------------------------------");
+            Console.WriteLine("            Well Done commander ! \n \n");
         }
         
         // -------------------

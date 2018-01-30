@@ -33,6 +33,7 @@ namespace SarandevBattleships
                     {
                         // loop until user exits
                         Console.Clear(); // clear the console of output
+                        gb1.MenuGraphic(); // print the graphic
                         gb1.ShowGameBoard(); // print the gameboard
                         
                         Console.WriteLine("\n EE to exit"); // display 1.
@@ -53,7 +54,7 @@ namespace SarandevBattleships
                                 // game complete, clear the screen
                                 Console.Clear();
                                 // show info
-                                Console.WriteLine("All ships down! Congratz");
+                                gb1.ScoreGraphic(); // show the graphic
                                 string info = gb1.CalculateHitRating(); // calc the rating
                                 Console.WriteLine(info); // display
                                 
