@@ -3,7 +3,6 @@
 // Custom Software for BEDE Gaming. All rights reserved
 
 using System;
-using System.Runtime.Remoting.Metadata.W3cXsd2001;
 
 namespace SarandevBattleships
 {
@@ -23,46 +22,46 @@ namespace SarandevBattleships
         // Properties definition (some are omitted as they're obsolete
         public void SetPosX (int inp)
         {
-            this.pos_x = inp;
+            pos_x = inp;
         }
         
         public int GetPosX()
         {
-            return this.pos_x;
+            return pos_x;
         }
         
         public void SetPosY (int inp)
         {
-            this.pos_y = inp;
+            pos_y = inp;
         }
         
         public int GetPosY()
         {
-            return this.pos_y;
+            return pos_y;
         }
 
         public void SetRotation(int inp)
         {
-            this.rotation = inp;
+            rotation = inp;
         }
 
         public int GetRotation()
         {
-            return this.rotation;
+            return rotation;
         }
 
         public void SetSize(int inp)
         {
             if (inp <= 5 & inp >= 4) // error control
             { 
-                this.size = inp;   
-                this.ChangeShipType(); // update the ship type
+                size = inp;   
+                ChangeShipType(); // update the ship type
             }
         }
 
         public int GetSize()
         {
-            return this.size;
+            return size;
         }
         
         // Constructor definition
@@ -74,17 +73,17 @@ namespace SarandevBattleships
             switch (size)
             {
                 case 4:
-                    this.type = "Destroyer";
+                    type = "Destroyer";
                     break;
                 case 5:
-                    this.type = "Battleship";
+                    type = "Battleship";
                     break;
-                default: this.type = "Undefined";
+                default: type = "Undefined";
                     break;
             }
 
             // The properties are defaulted to no rotation, x=0, y=0
-            this.rotation = 0; // set to no rotation (0 default/horizontal)
+            rotation = 0; // set to no rotation (0 default/horizontal)
             pos_x = 0;
             pos_y = 0;
         }
@@ -102,12 +101,12 @@ namespace SarandevBattleships
             switch (size)
             {
                 case 4:
-                    this.type = "Destroyer";
+                    type = "Destroyer";
                     break;
                 case 5:
-                    this.type = "Battleship";
+                    type = "Battleship";
                     break;
-                default: this.type = "Undefined";
+                default: type = "Undefined";
                     break;
             }
         }
@@ -115,12 +114,12 @@ namespace SarandevBattleships
         // Prints the object properties (Debug)
         public void print_me()
         {
-            Console.WriteLine(id.ToString() + ", " +
-                              size.ToString() + ", " +
+            Console.WriteLine(id + ", " +
+                              size + ", " +
                               type + ", " +
-                              rotation.ToString() + ", " +
-                              pos_x.ToString() + ", " +
-                              pos_y.ToString());
+                              rotation + ", " +
+                              pos_x + ", " +
+                              pos_y);
         }
     }
 }

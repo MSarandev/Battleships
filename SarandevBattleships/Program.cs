@@ -3,7 +3,6 @@
 // Custom Software for BEDE Gaming. All rights reserved
 
 using System;
-using System.Collections.Specialized;
 
 namespace SarandevBattleships
 {
@@ -34,7 +33,9 @@ namespace SarandevBattleships
                         // loop until user exits
                         Console.Clear(); // clear the console of output
                         gb1.MenuGraphic(); // print the graphic
+                        
                         gb1.ShowGameBoard(); // print the gameboard
+                        gb1.ShowHits(gb1.previous_hit);
                         
                         Console.WriteLine("\n EE to exit"); // display 1.
                         

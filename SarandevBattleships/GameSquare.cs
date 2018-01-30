@@ -16,32 +16,32 @@ namespace SarandevBattleships
         // Properties definition
         public void SetSquareX(int inp)
         {
-            this.square_x = inp;
+            square_x = inp;
         }
 
         public int GetSquareX()
         {
-            return this.square_x;
+            return square_x;
         }
         
         public void SetSquareY(int inp)
         {
-            this.square_y = inp;
+            square_y = inp;
         }
 
         public int GetSquareY()
         {
-            return this.square_y;
+            return square_y;
         }
         
         public void SetSquareOccupied(bool inp)
         {
-            this.square_occupied = inp;
+            square_occupied = inp;
         }
 
         public bool GetSquareOccupied()
         {
-            return this.square_occupied;
+            return square_occupied;
         }
         
         // Constructor definition
@@ -61,9 +61,9 @@ namespace SarandevBattleships
         // Custom methods
         public string PrintMe()
         {
-            return this.square_x.ToString() + "(X), " + 
-                   this.square_y.ToString() + "(Y), " + 
-                   this.square_occupied.ToString();
+            return square_x + "(X), " + 
+                   square_y + "(Y), " + 
+                   square_occupied;
         }
     }
 }

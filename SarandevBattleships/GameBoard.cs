@@ -3,9 +3,7 @@
 // Custom Software for BEDE Gaming. All rights reserved
 
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Data.SqlClient;
 using System.Linq;
 
 namespace SarandevBattleships
@@ -16,10 +14,12 @@ namespace SarandevBattleships
         
         // Variables definition
         private int grid_size = 10; // enables custom sizes (default 10)
-        private int shots_taken;
+        private int shots_taken; 
         private List<int> shots_successful = new List<int>(); // stores id's of squares
         private int shots_unsuccessful = 0; // default to 0
         private List<GameSquare> full_board = new List<GameSquare>();
+        private int sunk_ships;
+        public int previous_hit;
         
         
         // Properties definition
@@ -54,7 +54,7 @@ namespace SarandevBattleships
                 
                 return true;
             }
-            catch (System.IndexOutOfRangeException e)
+            catch (IndexOutOfRangeException e)
             {
                 // print the exception text
                 Console.WriteLine("Exception: {0}", e);
@@ -119,7 +119,7 @@ namespace SarandevBattleships
                             }
                             
                         }
-                    }catch(System.ArgumentOutOfRangeException e)
+                    }catch(ArgumentOutOfRangeException e)
                     {
                         // print the exception text
                         Console.WriteLine("Exception: {0}", e);
@@ -158,7 +158,7 @@ namespace SarandevBattleships
                                 gen_ok = PlaceShip(x,y,shp1.GetSize());
                             }
                         }
-                    }catch(System.ArgumentOutOfRangeException e)
+                    }catch(ArgumentOutOfRangeException e)
                     {
                         // print the exception text
                         Console.WriteLine("Exception: {0}", e);
@@ -175,7 +175,7 @@ namespace SarandevBattleships
         private bool PlaceShip(int a, int b, int ship_size)
         {
             Random rand = new Random(); // init
-            int index_in_array; // init
+            int index_in_array;
             int health_checker = 0; // determines whether generation was successful
             
             a = rand.Next(1, 6); // pick a value for the vert. axis
@@ -219,7 +219,7 @@ namespace SarandevBattleships
         {
             int count = 0; // init a counter
             int row_counter = 0; // init the counter
-            string[] alpha_container = new string[10] {"A","B","C","D","E","F","G","H","I","J"}; // create/init
+            string[] alpha_container = {"A","B","C","D","E","F","G","H","I","J"}; // create/init
             
             // print the first denomination
             Console.Write(" 1  2  3  4  5  6  7  8  9  10");
@@ -261,7 +261,7 @@ namespace SarandevBattleships
                     inp = inp.ToUpper(); // resterise the string
 
                     int strike_on; // init
-                    string[] alpha_list = new string[] {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J"}; // init
+                    string[] alpha_list = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J"}; // init
 
                     // filter out non-prefered letters
                     if (alpha_list.Contains(inp.Substring(0, 1)))
@@ -273,14 +273,34 @@ namespace SarandevBattleships
                         strike_on = (int.Parse(inp.Substring(1, 1)) + array_index * 10) - 1;
 
                         // check if the square is occupied
-                        if (full_board[strike_on].GetSquareOccupied() == true)
+                        if (full_board[strike_on].GetSquareOccupied())
                         {
                             // add the square to the hits list
                             shots_successful.Add(strike_on);
 
                             // increment the shot counter
                             shots_taken++;
+                            
+                            // update the game board with param
+                            previous_hit = 2;
 
+                            switch (shots_successful.Count)
+                            {
+                                    case 13:
+                                        return 1;
+                                    case 4:
+                                        sunk_ships++; // increment
+                                        break;
+                                    case 8:
+                                        sunk_ships++; // increment
+                                        break;
+                                    case 9:
+                                        sunk_ships++; // increment
+                                        break;
+                                    default:
+                                        return 0;
+                            }
+                            
                             if (shots_successful.Count == 13)
                             {
                                 // signal game completion
@@ -292,12 +312,36 @@ namespace SarandevBattleships
                             // increment the counters
                             shots_taken++;
                             shots_unsuccessful++;
+                            
+                            // update the game board with param
+                            previous_hit = 1;
                         }
                     }
                 }
             }
 
             return 0; // static
+        }
+        
+        // Method of displaying hits
+        public void ShowHits(int info)
+        {
+            // update the UI for each shot (the variable is parsed by the TakeAShot function
+            switch (info)
+            {
+                case 2:
+                    Console.WriteLine("\nPrevious Shot: " + "Direct Hit!");
+                    break;
+                case 1:
+                    Console.WriteLine("\nPrevious Shot: " + "Missed");
+                    break;
+                default:
+                    Console.WriteLine("\nPrevious Shot: " + "No shots yet");
+                    break;
+            }
+            
+            // update the control display
+            Console.WriteLine("\nShips sunk: " + sunk_ships + "/3");
         }
         
         // Method for calculating hit rating
@@ -333,6 +377,8 @@ namespace SarandevBattleships
         
         // -------------------
         // Graphical methods below
+        
+        // Method to print menu graphic
         public void MenuGraphic()
         {
             Console.WriteLine("    ____                                                        " + "\n" +
@@ -346,6 +392,7 @@ namespace SarandevBattleships
             Console.WriteLine("\n \n");
         }
 
+        // Method to print scores
         public void ScoreGraphic()
         {
             Console.WriteLine("                                             " + "\n" +
@@ -396,7 +443,7 @@ namespace SarandevBattleships
         // Debug method to count actual elements in AL
         public void CheckBoardSize()
         {
-            Console.WriteLine("Size: {0}", this.full_board.Count);
+            Console.WriteLine("Size: {0}", full_board.Count);
         }
     }
 }
