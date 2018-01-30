@@ -61,8 +61,8 @@ namespace SarandevBattleships
         // Custom methods
         public string PrintMe()
         {
-            return this.square_x.ToString() + ", " + 
-                   this.square_y.ToString() + ", " + 
+            return this.square_x.ToString() + "(X), " + 
+                   this.square_y.ToString() + "(Y), " + 
                    this.square_occupied.ToString();
         }
     }

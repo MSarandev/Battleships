@@ -11,15 +11,55 @@ namespace SarandevBattleships
         public static void Main(string[] args)
         {
             // Main application method
-            
-            GameBoard gb1 = new GameBoard();
+            GameBoard gb1 = new GameBoard(); // create new gameboard
 
-            bool control = gb1.GenerateBoard();
-            Console.WriteLine(control);
-            
-            gb1.PopulateBoard();
-            
-            gb1.PrintWholeBoard();
+            bool control = gb1.GenerateBoard(); // generate the gameboard
+            Console.WriteLine("OK - {0}",control); // print generation variable
+
+            if (control == true)
+            {
+                // generation complete, proceed
+                control = gb1.PopulateBoard(); // populate the board with ships
+
+                if (control == true)
+                {
+                    // population complete, proceed
+                    
+                    // Main game logic 
+                    while (true)
+                    {
+                        // loop until user exits
+                        Console.Clear(); // clear the console of output
+                        gb1.ShowGameBoard(); // print the gameboard
+                        
+                        Console.WriteLine("EE to exit"); // display 1.
+                        
+                        Console.WriteLine("Enter square id (A1, B2..) >> ");
+                        string inp = Console.ReadLine(); // accept input
+
+                        if (inp == "EE")
+                        {
+                            break; // exit
+                        }
+                        else
+                        {
+                            gb1.TakeAShot(inp); // call the function
+                        }
+                    }
+                }
+                else
+                {
+                    // faulty execution
+                    
+                    Console.WriteLine("Initialisation Failed. Halting!"); // print error
+                }
+            }
+            else
+            {
+                // faulty execution
+                
+                Console.WriteLine("Initialisation Failed. Halting!"); // print error
+            }
         }
     }
 }
