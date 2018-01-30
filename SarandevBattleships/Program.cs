@@ -3,6 +3,7 @@
 // Custom Software for BEDE Gaming. All rights reserved
 
 using System;
+using System.Collections.Specialized;
 
 namespace SarandevBattleships
 {
@@ -24,6 +25,8 @@ namespace SarandevBattleships
                 if (control == true)
                 {
                     // population complete, proceed
+
+                    int res = 0; // init
                     
                     // Main game logic 
                     while (true)
@@ -32,18 +35,30 @@ namespace SarandevBattleships
                         Console.Clear(); // clear the console of output
                         gb1.ShowGameBoard(); // print the gameboard
                         
-                        Console.WriteLine("EE to exit"); // display 1.
+                        Console.WriteLine("\n EE to exit"); // display 1.
                         
                         Console.WriteLine("Enter square id (A1, B2..) >> ");
                         string inp = Console.ReadLine(); // accept input
 
-                        if (inp == "EE")
+                        if (inp == "EE" || inp == "ee")
                         {
                             break; // exit
                         }
                         else
                         {
-                            gb1.TakeAShot(inp); // call the function
+                            res = gb1.TakeAShot(inp); // call the function
+
+                            if (res == 1)
+                            {
+                                // game complete, clear the screen
+                                Console.Clear();
+                                // show info
+                                Console.WriteLine("All ships down! Congratz");
+                                string info = gb1.CalculateHitRating(); // calc the rating
+                                Console.WriteLine(info); // display
+                                
+                                break;
+                            }
                         }
                     }
                 }
