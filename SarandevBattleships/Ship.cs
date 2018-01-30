@@ -84,7 +84,7 @@ namespace SarandevBattleships
             }
 
             // The properties are defaulted to no rotation, x=0, y=0
-            this.rotation = 90;
+            this.rotation = 0; // 1 is rotated
             pos_x = 0;
             pos_y = 0;
         }

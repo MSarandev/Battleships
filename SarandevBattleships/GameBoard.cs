@@ -3,7 +3,6 @@
 // Custom Software for BEDE Gaming. All rights reserved
 
 using System;
-using System.Collections;
 using System.Collections.Generic;
 
 namespace SarandevBattleships
@@ -86,7 +85,8 @@ namespace SarandevBattleships
 
                 // Randomise rotation
                 Random rand = new Random();
-                shp1.SetRotation(rand.Next(0, 1)); // rotate the ship randomly
+                //shp1.SetRotation(rand.Next(0, 1)); // rotate the ship randomly
+                shp1.SetRotation(1);
                 
                 // Place ship based on type/rotation
                 if (shp1.GetSize() == 5)
@@ -101,8 +101,17 @@ namespace SarandevBattleships
                         if (shp1.GetRotation() == 1)
                         {
                             // ship is rotated, limit on vertical
-                            y = rand.Next(1, 100); // get new random number
-                            x = rand.Next(1, 6); // get new random number
+                            
+                            //y = rand.Next(1, 100); // get new random number
+                            //x = rand.Next(1, 6); // get new random number
+                            
+                            // DEBUG
+                            y = 1;
+                            x = 1;
+                            // DEBUG
+                            
+                            // Rotation requires a re-worked index function
+                            // index_in_array = ((x + y) - 3) * (11 - y) + (y - 1);
 
                             for (int count = 0; count < 5; count++)
                             {
@@ -122,6 +131,7 @@ namespace SarandevBattleships
                         else
                         {
                             // ship is not rotated, limit on horizontal
+                            
                             y = rand.Next(1, 6); // get new random number
                             x = rand.Next(1, 100); // get new random number
 
